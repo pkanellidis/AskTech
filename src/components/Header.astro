@@ -31,11 +31,14 @@ import { siteConfig } from '@/site-config'
 
 			<div class='flex justify-center items-center md:justify-end gap-3 md:p-0'>
 				{
-					SOCIALNETWORKS.map((network) => (
-						<HeaderLink class='' href={network.url} target='_blank' aria-label={network.name}>
-							<span>{<network.icon />} </span>
-						</HeaderLink>
-					))
+					SOCIALNETWORKS.map(
+						(network) =>
+							!network.draft && (
+								<HeaderLink class='' href={network.url} target='_blank' aria-label={network.name}>
+									<span>{<network.icon />} </span>
+								</HeaderLink>
+							)
+					)
 				}
 			</div>
 		</nav>
