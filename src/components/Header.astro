@@ -5,10 +5,14 @@ import Search from '@/components/Search'
 import TagIcon from './icons/TagIcon.astro'
 import ToggleTheme from './ToggleTheme.astro'
 import { SOCIALNETWORKS } from '@/data/links'
+import { siteConfig } from '@/site-config'
 ---
 
-<header class='relative flex items-center h-12 font-semibold'>
-	<a class='text-lg mr-auto' href='/'>Home</a>
+<header class='relative flex items-center font-semibold'>
+	<a class='mr-auto flex w-full justify-start items-center gap-4' href='/'>
+		<img class='rounded-full' width='64' height='64' src={siteConfig.siteLogo} alt='asktech-logo' />
+		<div class='text-3xl md:text-5xl'>{siteConfig.title}</div>
+	</a>
 
 	<div
 		id='astro-header-drawer'
