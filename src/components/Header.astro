@@ -8,12 +8,17 @@ import { SOCIALNETWORKS } from '@/data/links'
 import { siteConfig } from '@/site-config'
 import Translate from './Translate.astro'
 import { useTranslations } from '../i18n/utils'
+import LocalizedLink from './LocalizedLink.astro'
 
 const t = useTranslations(Astro.currentLocale)
 ---
 
 <header class='relative flex items-center font-semibold'>
-	<a class='mr-auto flex w-full justify-start items-center gap-4' href='/'>
+	<LocalizedLink
+		class='mr-auto flex w-full justify-start items-center gap-4'
+		path='/'
+		locale={Astro.currentLocale}
+	>
 		<img
 			class='rounded-full'
 			width='64'
@@ -22,7 +27,7 @@ const t = useTranslations(Astro.currentLocale)
 			alt={t('site.logo.alt')}
 		/>
 		<div class='text-3xl md:text-5xl'>{t('site.title')}</div>
-	</a>
+	</LocalizedLink>
 
 	<div
 		id='astro-header-drawer'

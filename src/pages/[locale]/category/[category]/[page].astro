@@ -7,6 +7,7 @@ import { sluglify, unsluglify, getCategories, getPosts } from '@/utils'
 import { siteConfig } from '@/data/site.config'
 import Pagination from '@/components/Pagination'
 import { getRelativeLocaleUrlList } from 'astro:i18n'
+import { useTranslations } from 'src/i18n/utils'
 
 const params = Astro.params
 const { page, locale } = Astro.props
@@ -42,10 +43,11 @@ const categoryName = (await getCategories()).find(
 	(category) => category.toLowerCase() === unsluglifyNameCategory
 )
 const posts = page.data
+const t = useTranslations(Astro.currentLocale)
 ---
 
-<BaseLayout title={categoryName}>
-	<TitlePage title={categoryName} />
+<BaseLayout title={t(`categories.${categoryName}`)}>
+	<TitlePage title={t(`categories.${categoryName}`)} />
 	<ListCategories activeCategory={params.category} />
 	<ListPosts posts={posts} />
 	<Pagination page={page} />

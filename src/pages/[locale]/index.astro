@@ -6,6 +6,7 @@ import BaseLayout from '@/layouts/BaseLayout'
 import { getPosts } from '@/utils'
 import type { GetStaticPaths } from 'astro'
 import { getRelativeLocaleUrlList } from 'astro:i18n'
+import { useTranslations } from 'src/i18n/utils'
 
 const MAX_POSTS = 5 // max number of posts to show on the home page
 const posts = await getPosts(MAX_POSTS)
@@ -19,14 +20,16 @@ export const getStaticPaths = (() => {
 		return { params: { locale } }
 	})
 }) satisfies GetStaticPaths
+
+const t = useTranslations(Astro.currentLocale)
 ---
 
-<BaseLayout title='Home'>
-	<TitlePage title='All' />
+<BaseLayout title={t('page.home.title')}>
+	<TitlePage title={t('page.home.all')} />
 	<ListCategories />
 
 	<div>
-		<h2 class='text-lg font-medium tracking-wide text-end'>Latest Posts</h2>
+		<h2 class='text-lg font-medium tracking-wide text-end'>{t('page.home.latest_posts')}</h2>
 		<ListPosts FirstBig={true} posts={posts} />
 	</div>
 </BaseLayout>

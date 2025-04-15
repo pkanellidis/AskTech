@@ -5,6 +5,7 @@ import { getTags } from '@/utils'
 import type { GetStaticPaths } from 'astro'
 import { getRelativeLocaleUrlList } from 'astro:i18n'
 import LocalizedLink from '@/components/LocalizedLink'
+import { useTranslations } from 'src/i18n/utils'
 
 const tags = await getTags()
 
@@ -17,10 +18,12 @@ export const getStaticPaths = (() => {
 		}
 	})
 }) satisfies GetStaticPaths
+
+const t = useTranslations(Astro.currentLocale)
 ---
 
-<BaseLayout title='Tags'>
-	<TitlePage title='Tags' />
+<BaseLayout title={t('page.tags.title')} '>
+	<TitlePage title={t('page.tags.title')} />
 	<div class='flex justify-center flex-wrap gap-4'>
 		{
 			tags.map((tag) => (
