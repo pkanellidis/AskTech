@@ -7,12 +7,21 @@ import ToggleTheme from './ToggleTheme.astro'
 import { SOCIALNETWORKS } from '@/data/links'
 import { siteConfig } from '@/site-config'
 import Translate from './Translate.astro'
+import { useTranslations } from '../i18n/utils'
+
+const t = useTranslations(Astro.currentLocale)
 ---
 
 <header class='relative flex items-center font-semibold'>
 	<a class='mr-auto flex w-full justify-start items-center gap-4' href='/'>
-		<img class='rounded-full' width='64' height='64' src={siteConfig.siteLogo} alt='asktech-logo' />
-		<div class='text-3xl md:text-5xl'>{siteConfig.title}</div>
+		<img
+			class='rounded-full'
+			width='64'
+			height='64'
+			src={siteConfig.siteLogo}
+			alt={t('site.logo.alt')}
+		/>
+		<div class='text-3xl md:text-5xl'>{t('site.title')}</div>
 	</a>
 
 	<div
@@ -26,7 +35,8 @@ import Translate from './Translate.astro'
 				class='flex flex-col gap-4 md:flex-row md:border-r-2 border-black pr-4 dark:border-white'
 			>
 				<HeaderLink href='/tags' class='flex items-center gap-1 text-2xl md:text-base'>
-					<TagIcon /> Tags
+					<TagIcon />
+					{t('nav.tags')}
 				</HeaderLink>
 				<Translate />
 			</div>
@@ -36,7 +46,12 @@ import Translate from './Translate.astro'
 					SOCIALNETWORKS.map(
 						(network) =>
 							!network.draft && (
-								<HeaderLink class='' href={network.url} target='_blank' aria-label={network.name}>
+								<HeaderLink
+									class=''
+									href={network.url}
+									target='_blank'
+									aria-label={t('nav.social.aria', { name: network.name })}
+								>
 									<span>{<network.icon />} </span>
 								</HeaderLink>
 							)
@@ -50,10 +65,10 @@ import Translate from './Translate.astro'
 		<div>
 			<Search />
 		</div>
-		<ToggleTheme />
+		<ToggleTheme aria-label={t('nav.toggle_theme')} />
 		<button id='astro-header-drawer-button' type='button' class='md:ml-6 md:hidden'>
 			<MenuIcon />
-			<span class='sr-only'>Show Menu</span>
+			<span class='sr-only'>{t('nav.menu')}</span>
 		</button>
 	</div>
 </header>

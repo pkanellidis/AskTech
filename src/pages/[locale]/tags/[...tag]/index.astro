@@ -3,14 +3,19 @@ import BaseLayout from '@/layouts/BaseLayout'
 import ListPosts from '@/components/ListPosts'
 import TitlePage from '@/components/TitlePage'
 import { getTags, getPostByTag } from '@/utils'
+import { getRelativeLocaleUrlList } from 'astro:i18n'
 
 export async function getStaticPaths() {
 	const tags = await getTags()
 
-	return tags.map((tag) => ({
-		params: { tag },
-		props: { tag }
-	}))
+	const paths = getRelativeLocaleUrlList()
+
+	return paths.flatMap((locale) => {
+		return tags.map((tag) => ({
+			params: { tag, locale: locale.split('/')[1] },
+			props: { tag }
+		}))
+	})
 }
 
 const { tag } = Astro.props

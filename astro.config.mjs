@@ -5,8 +5,16 @@ import tailwind from '@astrojs/tailwind'
 import { remarkReadingTime } from './src/utils/readTime.ts'
 import { siteConfig } from './src/data/site.config'
 
+
 // https://astro.build/config
 export default defineConfig({
+	i18n: {
+		locales: ["en", "gr"],
+		defaultLocale: "en",
+		routing: {
+			prefixDefaultLocale: true
+		}
+	},
 	site: siteConfig.site,
 	markdown: {
 		remarkPlugins: [remarkReadingTime],

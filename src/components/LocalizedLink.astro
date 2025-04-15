@@ -1,0 +1,17 @@
+---
+import type { HTMLAttributes } from 'astro/types'
+import { getRelativeLocaleUrl, type GetLocaleOptions } from 'astro:i18n'
+
+type Props = {
+	locale: string | undefined
+	path: string | undefined
+	options?: GetLocaleOptions
+} & HTMLAttributes<'a'>
+
+const { locale, path, options, ...props } = Astro.props
+const href = getRelativeLocaleUrl(locale, path, options)
+---
+
+<a href={href} {...props}>
+	<slot />
+</a>

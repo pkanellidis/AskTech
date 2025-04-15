@@ -4,10 +4,21 @@ import ListPosts from '@/components/ListPosts'
 import TitlePage from '@/components/TitlePage'
 import BaseLayout from '@/layouts/BaseLayout'
 import { getPosts } from '@/utils'
-import { siteConfig } from '@/site-config'
+import type { GetStaticPaths } from 'astro'
+import { getRelativeLocaleUrlList } from 'astro:i18n'
 
 const MAX_POSTS = 5 // max number of posts to show on the home page
 const posts = await getPosts(MAX_POSTS)
+
+export const getStaticPaths = (() => {
+	const paths = getRelativeLocaleUrlList()
+
+	return paths.map((url) => {
+		const locale = url.split('/')[1]
+
+		return { params: { locale } }
+	})
+}) satisfies GetStaticPaths
 ---
 
 <BaseLayout title='Home'>

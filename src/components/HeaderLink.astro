@@ -1,6 +1,7 @@
 ---
 import type { HTMLAttributes } from 'astro/types'
 import { cn } from '@/utils'
+import LocalizedLink from './LocalizedLink.astro'
 type Props = HTMLAttributes<'a'>
 
 const { href, class: className, ...props } = Astro.props
@@ -9,11 +10,11 @@ const { pathname } = Astro.url
 const isActive = href === pathname || href === pathname.replace(/\/$/, '')
 ---
 
-<a
-	href={href}
+<LocalizedLink
+	path={href}
+	locale={Astro.currentLocale}
 	class={cn(isActive ? 'text-opacity-100' : 'text-opacity-60', className)}
 	rel='noopener noreferrer '
-	{...props}
 >
 	<slot />
-</a>
+</LocalizedLink>

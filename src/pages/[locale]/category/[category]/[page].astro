@@ -6,27 +6,36 @@ import TitlePage from '@/components/TitlePage'
 import { sluglify, unsluglify, getCategories, getPosts } from '@/utils'
 import { siteConfig } from '@/data/site.config'
 import Pagination from '@/components/Pagination'
+import { getRelativeLocaleUrlList } from 'astro:i18n'
+
+const params = Astro.params
+const { page, locale } = Astro.props
 
 export async function getStaticPaths({ paginate }: any) {
 	const categories = await getCategories()
 	const allPosts = await getPosts()
 
-	return categories.flatMap((category: string) => {
-		const unsluglifyNameCategory = unsluglify(category!.toLowerCase())
-		const filteredPosts = allPosts.filter(
-			(post) => post.data.category.toLowerCase() === unsluglifyNameCategory
-		)
+	const paths = getRelativeLocaleUrlList()
 
-		return paginate(filteredPosts, {
-			params: {
-				category: sluglify(category.toLowerCase())
-			},
-			pageSize: siteConfig.paginationSize
+	return paths.flatMap((locale) => {
+		return categories.flatMap((category: string) => {
+			const unsluglifyNameCategory = unsluglify(category!.toLowerCase())
+			const filteredPosts = allPosts.filter(
+				(post) => post.data.category.toLowerCase() === unsluglifyNameCategory
+			)
+
+			const result = paginate(filteredPosts, {
+				params: {
+					category: sluglify(category.toLowerCase()),
+					locale: locale.split('/')[1]
+				},
+				pageSize: siteConfig.paginationSize
+			})
+
+			return result
 		})
 	})
 }
-const params = Astro.params
-const { page } = Astro.props
 
 const unsluglifyNameCategory = unsluglify(params.category!.toLowerCase())
 const categoryName = (await getCategories()).find(
