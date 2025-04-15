@@ -6,6 +6,7 @@ import TagIcon from './icons/TagIcon.astro'
 import ToggleTheme from './ToggleTheme.astro'
 import { SOCIALNETWORKS } from '@/data/links'
 import { siteConfig } from '@/site-config'
+import Translate from './Translate.astro'
 ---
 
 <header class='relative flex items-center font-semibold'>
@@ -27,6 +28,7 @@ import { siteConfig } from '@/site-config'
 				<HeaderLink href='/tags' class='flex items-center gap-1 text-2xl md:text-base'>
 					<TagIcon /> Tags
 				</HeaderLink>
+				<Translate />
 			</div>
 
 			<div class='flex justify-center items-center md:justify-end gap-3 md:p-0'>

@@ -20,3 +20,8 @@ const blog = defineCollection({
 })
 
 export const collections = { blog }
+
+//TODO: Translations using i18n and categories
+// Social Sharing
+// SEO Checks and tools
+// Theming & Colours
