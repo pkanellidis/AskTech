@@ -1,0 +1,82 @@
+---
+type Props = {
+	items: { label: string; href: string; active: boolean }[]
+	id: string
+}
+
+const { items, id } = Astro.props
+
+const activeItem = items.find((item) => {
+	return item.active
+})
+---
+
+<div class='relative inline-block text-left' id={`dropdown-${id}`}>
+	<div>
+		<button
+			type='button'
+			class='inline-flex w-full justify-center gap-x-1.5 rounded-md px-3 py-2 text-sm font-semibold shadow-xs ring-1 ring-gray-300 ring-inset dark:bg-gray-800 dark:hover:bg-gray-500 hover:bg-gray-50'
+			id={`dropdown-button-${id}`}
+			aria-expanded='false'
+			aria-haspopup='true'
+		>
+			{activeItem?.label || 'Select an option'}
+			<svg
+				class='-mr-1 size-5 text-gray-400'
+				viewBox='0 0 20 20'
+				fill='currentColor'
+				aria-hidden='true'
+				data-slot='icon'
+			>
+				<path
+					fill-rule='evenodd'
+					d='M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z'
+					clip-rule='evenodd'></path>
+			</svg>
+		</button>
+	</div>
+
+	<div
+		id={`dropdown-menu-${id}`}
+		class='absolute dark:bg-gray-800 overflow-hidden right-0 z-10 mt-2 w-56 origin-top-right rounded-md shadow-lg ring-1 ring-black/5 focus:outline-hidden hidden'
+		role='menu'
+		aria-orientation='vertical'
+		aria-labelledby={`dropdown-button-${id}`}
+	>
+		<div role='none'>
+			{
+				items.map((item) => (
+					<a
+						href={item.href}
+						class={`block px-4 py-2 text-sm transition-colors ease-in dark:hover:bg-gray-500 hover:bg-gray-200 ${
+							item.active
+								? 'bg-gray-100 text-gray-900 dark:bg-gray-700 dark:text-gray-100'
+								: 'text-gray-700 dark:text-gray-300'
+						}`}
+						role='menuitem'
+						tabindex='-1'
+					>
+						{item.label}
+					</a>
+				))
+			}
+		</div>
+	</div>
+</div>
+
+<script>
+	// Global event listener that will stay active even after DOM changes
+	document.addEventListener('click', function (e) {
+		// Check if the clicked element is a dropdown button or contains one
+		const buttonId = e.target.id
+		if (buttonId && buttonId.startsWith('dropdown-button-')) {
+			// Extract the dropdown ID from the button ID
+			const dropdownId = buttonId.replace('dropdown-button-', '')
+			const menu = document.getElementById(`dropdown-menu-${dropdownId}`)
+
+			if (menu) {
+				menu.classList.toggle('hidden')
+			}
+		}
+	})
+</script>

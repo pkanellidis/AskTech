@@ -1,0 +1,26 @@
+---
+import { getRelativeLocaleUrlList } from 'astro:i18n'
+import { useTranslations } from 'src/i18n/utils'
+import Dropdown from '../Dropdown.astro'
+
+const t = useTranslations(Astro.currentLocale)
+
+const allLocales = getRelativeLocaleUrlList()
+
+const languageOptions = allLocales.map((locale) => {
+	const code = locale.split('/')[1]
+	const trimmedPath = Astro.url.pathname.split(`/${Astro.currentLocale}`)[1]
+	console.log(Astro.url.pathname.split(`/${Astro.currentLocale}`))
+
+	const targetPath = `/${code}${trimmedPath}`
+	console.log(targetPath)
+
+	return {
+		label: t(`languages.${code}`),
+		href: targetPath,
+		active: code === Astro.currentLocale
+	}
+})
+---
+
+<Dropdown id='language-select' items={languageOptions} />

@@ -9,6 +9,9 @@ import { siteConfig } from '@/site-config'
 import Translate from './Translate.astro'
 import { useTranslations } from '../i18n/utils'
 import LocalizedLink from './LocalizedLink.astro'
+import Dropdown from './Dropdown.astro'
+import { getRelativeLocaleUrlList } from 'astro:i18n'
+import LanguageSelection from './Locales/LanguageSelection.astro'
 
 const t = useTranslations(Astro.currentLocale)
 ---
@@ -43,7 +46,7 @@ const t = useTranslations(Astro.currentLocale)
 					<TagIcon />
 					{t('nav.tags')}
 				</HeaderLink>
-				<Translate />
+				<LanguageSelection />
 			</div>
 
 			<div class='flex justify-center items-center md:justify-end gap-3 md:p-0'>

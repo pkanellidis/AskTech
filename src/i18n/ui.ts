@@ -1,10 +1,3 @@
-export const languages = {
-	en: 'English',
-	gr: 'Ελληνικά'
-}
-
-export const defaultLang = 'en'
-
 export const ui = {
 	en: {
 		'nav.home': 'Home',
@@ -24,7 +17,11 @@ export const ui = {
 		'card.read': 'Read more',
 		'page.tags.title': 'Tags',
 		'page.search.action.search': 'Search',
-		'page.search.action.close': 'Close'
+		'page.search.action.close': 'Close',
+		'languages.select': 'Language',
+		'languages.en': 'English',
+		'languages.gr': 'Greek',
+		'blog.posts.share': 'Share'
 	},
 	gr: {
 		'nav.home': 'Αρχική',
@@ -44,6 +41,10 @@ export const ui = {
 		'card.read': 'Περισσότερα',
 		'page.tags.title': 'Ετικέτες',
 		'page.search.action': 'Αναζήτηση',
-		'page.search.action.close': 'Άκυρο'
+		'page.search.action.close': 'Άκυρο',
+		'languages.select': 'Γλώσσα',
+		'languages.en': 'Αγγλικά',
+		'languages.gr': 'Ελληνικά',
+		'blog.posts.share': 'Κοινοποίηση'
 	}
 } as const
