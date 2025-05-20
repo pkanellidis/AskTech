@@ -6,8 +6,9 @@ import type { GetStaticPaths } from 'astro'
 import { getRelativeLocaleUrlList } from 'astro:i18n'
 import LocalizedLink from '@/components/LocalizedLink'
 import { useTranslations } from 'src/i18n/utils'
+import { getTagsByLocale } from 'src/utils/post'
 
-const tags = await getTags()
+const tags = await getTagsByLocale(Astro.currentLocale)
 
 export const getStaticPaths = (() => {
 	const paths = getRelativeLocaleUrlList()

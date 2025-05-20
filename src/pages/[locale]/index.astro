@@ -7,9 +7,10 @@ import { getPosts } from '@/utils'
 import type { GetStaticPaths } from 'astro'
 import { getRelativeLocaleUrlList } from 'astro:i18n'
 import { useTranslations } from 'src/i18n/utils'
+import { getPostsByLocale } from 'src/utils/post'
 
 const MAX_POSTS = 5 // max number of posts to show on the home page
-const posts = await getPosts(MAX_POSTS)
+const posts = await getPostsByLocale(Astro.currentLocale, MAX_POSTS)
 
 export const getStaticPaths = (() => {
 	const paths = getRelativeLocaleUrlList()

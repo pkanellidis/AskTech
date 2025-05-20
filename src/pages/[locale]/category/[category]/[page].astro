@@ -8,6 +8,7 @@ import { siteConfig } from '@/data/site.config'
 import Pagination from '@/components/Pagination'
 import { getRelativeLocaleUrlList } from 'astro:i18n'
 import { useTranslations } from 'src/i18n/utils'
+import { getPostsByLocale } from 'src/utils/post'
 
 const params = Astro.params
 const { page, locale } = Astro.props

@@ -11,11 +11,14 @@ import Disqus from '@/components/Disqus'
 import { disqusConfig } from '@/data/disqus.config'
 import { getRelativeLocaleUrlList } from 'astro:i18n'
 
-const posts = await getCollection('blog')
+const posts = await getCollection(Astro.currentLocale)
+
 export async function getStaticPaths() {
 	const posts = await getPosts()
 
 	const paths = getRelativeLocaleUrlList()
+
+	console.log(posts)
 
 	return paths.flatMap((locale) => {
 		return posts.map((post) => ({

@@ -46,9 +46,14 @@ const t = useTranslations(Astro.currentLocale)
 	<div class='flex justify-between flex-col gap-4 md:gap-0 py-6 pl-1'>
 		<div class='flex flex-col gap-3'>
 			<div class='flex flex-col gap-2'>
-				<a class='text-2xl font-semibold -tracking-wider' href={`/post/${slug}/`}>
+				<LocalizedLink
+					class='text-2xl font-semibold -tracking-wider'
+					locale={Astro.currentLocale}
+					path={`/post/${slug}/`}
+					aria-label={`go to ${title}`}
+				>
 					{title}
-				</a>
+				</LocalizedLink>
 			</div>
 
 			<p
@@ -59,16 +64,17 @@ const t = useTranslations(Astro.currentLocale)
 		</div>
 
 		<footer class='flex justify-between items-center'>
-			<a
-				href={`/post/${slug}/`}
+			<LocalizedLink
 				class='flex justify-center items-center dark:text-white rounded-full hover:translate-x-1 transition-transform duration-150 ease-in-out font-semibold gap-1 group'
 				aria-label={`go to ${title}`}
+				locale={Astro.currentLocale}
+				path={`/post/${slug}/`}
 			>
 				{t('card.read')}
 				<span class='mt-[1px] group-hover:rotate-45 transition-transform duration-250 ease-in-out'
 					><ArrowUp width='18' height='18' /></span
 				>
-			</a>
+			</LocalizedLink>
 		</footer>
 	</div>
 </article>

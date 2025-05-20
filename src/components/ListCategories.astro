@@ -1,8 +1,9 @@
 ---
 import { getCategories } from '@/utils'
 import Category from '@/components/Category'
+import { getCategoriesByLocale } from 'src/utils/post'
 
-const categories = await getCategories()
+const categories = await getCategoriesByLocale(Astro.currentLocale)
 
 const { activeCategory } = Astro.props
 ---
