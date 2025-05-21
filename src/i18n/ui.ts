@@ -48,3 +48,5 @@ export const ui = {
 		'blog.posts.share': 'Κοινοποίηση'
 	}
 } as const
+
+export const defaultLang = 'en'
