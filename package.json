@@ -23,6 +23,7 @@
 		"dev": "npx tinacms dev -c \"astro dev\"",
 		"start": "astro dev",
 		"build": "astro build",
+		"test": "vitest",
 		"sync": "astro sync",
 		"preview": "astro preview",
 		"postbuild": "pagefind --site dist",
@@ -43,13 +44,19 @@
 		"@astrojs/tailwind": "5.1.0",
 		"@pagefind/default-ui": "^1.0.4",
 		"@tailwindcss/typography": "0.5.10",
+		"@testing-library/jest-dom": "^6.6.3",
+		"@testing-library/react": "^16.3.0",
+		"@testing-library/user-event": "^14.6.1",
 		"@tinacms/cli": "^1.5.30",
+		"@types/jest": "^29.5.14",
 		"@typescript-eslint/parser": "^6.16.0",
 		"clsx": "2.0.0",
 		"eslint": "^8.56.0",
 		"eslint-plugin-astro": "^0.31.0",
 		"eslint-plugin-jsx-a11y": "^6.8.0",
 		"husky": "^8.0.3",
+		"jest": "^29.7.0",
+		"jsdom": "^26.1.0",
 		"lint-staged": "^15.2.0",
 		"mdast-util-to-string": "^4.0.0",
 		"motion": "^10.16.4",
@@ -62,7 +69,9 @@
 		"tailwind-merge": "2.0.0",
 		"tailwindcss": "3.3.5",
 		"tinacms": "^1.5.21",
-		"typescript": "^5.2.2"
+		"ts-jest": "^29.3.4",
+		"typescript": "^5.2.2",
+		"vitest": "^3.1.4"
 	},
 	"lint-staged": {
 		"*.{astro,js,jsx,ts,tsx,md,mdx,json}": [
