@@ -7,7 +7,7 @@ export const getCategories = async () => {
 	return [...categoriesEN, ...categoriesGR]
 }
 
-export const getCategoriesByLocale = async (locale: 'en' | 'gr') => {
+export const getCategoriesByLocale = async (locale: string) => {
 	const posts = await getCollection(locale)
 	const categories = new Set(
 		posts?.filter((post) => !post.data.draft).map((post) => post.data.category)
@@ -21,7 +21,7 @@ export const getPosts = async (max?: number) => {
 	return [...(await getPostsByLocale('en', max)), ...(await getPostsByLocale('gr', max))]
 }
 
-export const getPostsByLocale = async (locale: 'en' | 'gr', max?: number) => {
+export const getPostsByLocale = async (locale: string, max?: number) => {
 	return (await getCollection(locale))
 		?.filter((post) => !post.data.draft)
 		?.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
@@ -34,13 +34,13 @@ export const getTags = async () => {
 	return [...tagsEN, ...tagsGR]
 }
 
-export const getTagsByLocale = async (locale: 'en' | 'gr') => {
+export const getTagsByLocale = async (locale: string) => {
 	const posts = await getCollection(locale)
 	const tags = new Set()
 	posts
 		?.filter((post) => !post.data.draft)
 		?.forEach((post) => {
-			post.data.tags.forEach((tag) => {
+			post.data.tags.forEach((tag: string) => {
 				if (tag != '') {
 					tags.add(tag.toLowerCase())
 				}
@@ -50,18 +50,18 @@ export const getTagsByLocale = async (locale: 'en' | 'gr') => {
 	return Array.from(tags)
 }
 
-export const getPostByTag = async (locale: 'en' | 'gr', tag: string) => {
-	const posts = await getPosts(locale)
+export const getPostByTag = async (locale: string, tag: string) => {
+	const posts = await getPostsByLocale(locale)
 	const lowercaseTag = tag.toLowerCase()
 	return posts
 		?.filter((post) => !post.data.draft)
 		?.filter((post) => {
-			return post.data.tags.some((postTag) => postTag.toLowerCase() === lowercaseTag)
+			return post.data.tags.some((postTag: string) => postTag.toLowerCase() === lowercaseTag)
 		})
 }
 
-export const filterPostsByCategory = async (locale: 'en' | 'gr', category: string) => {
-	const posts = await getPosts(locale)
+export const filterPostsByCategory = async (category: string) => {
+	const posts = await getPosts()
 	return posts
 		?.filter((post) => !post.data.draft)
 		?.filter((post) => post.data.category.toLowerCase() === category)
