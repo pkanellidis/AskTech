@@ -44,7 +44,7 @@
 		"@astrojs/tailwind": "5.1.0",
 		"@pagefind/default-ui": "^1.0.4",
 		"@tailwindcss/typography": "0.5.10",
-		"@tinacms/cli": "^1.5.30",
+		"@tinacms/cli": "^2.0.4",
 		"@types/jest": "^29.5.14",
 		"@typescript-eslint/parser": "^6.16.0",
 		"clsx": "2.0.0",
@@ -65,7 +65,7 @@
 		"slugify": "^1.6.6",
 		"tailwind-merge": "2.0.0",
 		"tailwindcss": "3.3.5",
-		"tinacms": "^1.5.21",
+		"tinacms": "^3.1.1",
 		"ts-jest": "^29.3.4",
 		"typescript": "^5.2.2",
 		"vitest": "^3.1.4"
